@@ -10,13 +10,11 @@ class AdminSkillController extends Controller
     /**
      * Display a listing of the resource.
      */
-
-     public function index()
-     {
-         $skill = Skill::all();
-         return view('admin.skill.index', compact('skill'));
-     }     
-     
+    public function index()
+    {
+        $skill = Skill::all();
+        return view('admin.skill.index', compact('skill'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +23,6 @@ class AdminSkillController extends Controller
     {
         return view('admin.skill.create');
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -45,35 +42,30 @@ class AdminSkillController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Skill $skill) // Model Binding
     {
-        $skill = Skill::find($id);
         return view('admin.skill.show', compact('skill'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Skill $skill) // Model Binding
     {
-        $skill = Skill::find($id);
         return view('admin.skill.edit', compact('skill'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Skill $skill) // Model Binding
     {
         $request->validate([
             'title' => 'required',
             'description' => 'required',
         ]);
 
-        $skill = Skill::find($id);
-        $skill->title = $request->input('title');
-        $skill->description = $request->input('description');
-        $skill->save();
+        $skill->update($request->all());
 
         return redirect()->route('skill.index');
     }
@@ -81,10 +73,10 @@ class AdminSkillController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Skill $skill) // Model Binding
     {
-        $skill = Skill::find($id);
         $skill->delete();
+
         return redirect()->route('skill.index');
     }
 }

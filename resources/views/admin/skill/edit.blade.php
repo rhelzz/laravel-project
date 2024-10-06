@@ -6,19 +6,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Add User - Admin</title>
+        <title>Edit Skill - Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{{ asset('template-admin/css/styles.css') }}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-        <x-navbar-full>
-        </x-navbar-full>
+        <x-navbar-full></x-navbar-full>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <x-navbar-admin>
-                    </x-navbar-admin>
+                    <x-navbar-admin></x-navbar-admin>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Start Bootstrap
@@ -29,7 +27,7 @@
                 <main class="ms-5">
                     <div class="container mt-5">
                         <h1>Edit Skill</h1>
-                        <form action="{{ route('skill.update', $skill->id) }}" method="POST">
+                        <form action="{{ route('skill.update', $skill) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="form-group my-3">
