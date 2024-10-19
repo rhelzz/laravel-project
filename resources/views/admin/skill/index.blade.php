@@ -7,9 +7,10 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Index - Admin</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{{ asset('template-admin/css/styles.css') }}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
         <x-navbar-full></x-navbar-full>
@@ -28,35 +29,37 @@
                     <div class="container mt-5">
                         <h1>Daftar Skill</h1>
                         <a href="{{ route('skill.create') }}" class="btn btn-primary mb-3">Tambah Skill</a>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Judul</th>
-                                    <th>Deskripsi</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($skill as $index => $row)
+                        <div class="card px-5 py-3">
+                            <table class="table table-bordered" id="dataTable">
+                                <thead>
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $row->title }}</td>
-                                        <td>{{ Str::limit($row->description, 50) }}</td>
-                                        <td>
-                                            <a href="{{ route('skill.show', $row) }}" class="btn btn-info">Detail</a>
-                                            <a href="{{ route('skill.edit', $row) }}" class="btn btn-warning">Edit</a>
-                                            
-                                            <form action="{{ route('skill.destroy', $row) }}" method="POST" style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus skill ini?')">Hapus</button>
-                                            </form>
-                                        </td>
+                                        <th>No</th>
+                                        <th>Judul</th>
+                                        <th>Deskripsi</th>
+                                        <th>Aksi</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach($skill as $index => $row)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $row->title }}</td>
+                                            <td>{{ Str::limit($row->description, 50) }}</td>
+                                            <td>
+                                                <a href="{{ route('skill.show', $row) }}" class="btn btn-info">Detail</a>
+                                                <a href="{{ route('skill.edit', $row) }}" class="btn btn-warning">Edit</a>
+                                                
+                                                <form action="{{ route('skill.destroy', $row) }}" method="POST" style="display:inline-block;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus skill ini?')">Hapus</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -80,5 +83,11 @@
         <script src="{{ asset('template-admin/assets/demo/chart-bar-demo.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="{{ asset('template-admin/js/datatables-simple-demo.js') }}"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('#dataTable').DataTable();
+            } );
+        </script>
     </body>
 </html>
