@@ -11,6 +11,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body class="sb-nav-fixed">
         <x-navbar-full></x-navbar-full>
@@ -52,7 +53,7 @@
                                                 <form action="{{ route('skill.destroy', $row) }}" method="POST" style="display:inline-block;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus skill ini?')">Hapus</button>
+                                                    <button type="button" onclick="notifHapus(this)" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus skill ini?')">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -89,5 +90,56 @@
                 $('#dataTable').DataTable();
             } );
         </script>
+        // Delete Notif
+        <script>
+            function notifHapus(button){
+                Swal.fire({
+                icon: 'info',
+                title: 'info',
+                text: 'Do you want delete this data??',
+                showCancelButton: true,
+                cancelButonText: 'Ngga jadi bang',
+                timer: 3000,
+                showConfirmButton: true
+            }).then((result)=>{
+                if (result.isConfirmed){
+                    button.parentElement.submit();
+                }
+            });
+            }
+
+            @if (session('delete'))
+                Swal.fire({
+                    title: 'Info',
+                    text: 'Data has been deleted successfuly!',
+                    icon: 'success'
+                })
+                
+            @endif
+        </script>
+
+        // Data Notif
+        @if(session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        </script>
+        @endif
+
+        <!-- SweetAlert Error Message -->
+        @if($errors->any())
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'There were some errors. Please check your inputs.',
+                });
+            </script>
+        @endif
     </body>
 </html>
