@@ -5,6 +5,10 @@
             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
             Dashboard
         </a>
+        <a class="nav-link" href="dashboard/skill">
+            <div class="sb-nav-link-icon"><i class="fa-solid fa-bolt-lightning"></i></i></div>
+            Skill
+        </a>
         <a class="nav-link" href="{{ route('admin.tables') }}">
             <div class="sb-nav-link-icon"><i class="fa-regular fa-user"></i></div>
             Tabel User

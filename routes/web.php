@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\AdminCertificateController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CertificatesController;
 use App\Http\Controllers\ContactController;
 // use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -11,6 +11,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TblDinamisController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminSkillController;
+use App\Http\Controllers\CertificatesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -99,5 +100,7 @@ Route::delete('/admin/deletekonten/{id}', [TblDinamisController::class, 'destroy
 ->name('admin.deletekonten');
 
 Route::resource('/admin/dashboard/skill', AdminSkillController::class);
+
+Route::resource('admin/dashboard/certificate', AdminCertificateController::class);
 
 require __DIR__.'/auth.php';

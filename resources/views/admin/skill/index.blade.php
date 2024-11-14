@@ -98,7 +98,6 @@
                 title: 'info',
                 text: 'Do you want delete this data??',
                 showCancelButton: true,
-                cancelButonText: 'Ngga jadi bang',
                 timer: 3000,
                 showConfirmButton: true
             }).then((result)=>{
