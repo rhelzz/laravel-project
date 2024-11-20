@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AdminCertificateController;
+use App\Http\Controllers\Admin\AdminContactController;
+use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 // use App\Http\Controllers\HomeController;
@@ -101,6 +103,10 @@ Route::delete('/admin/deletekonten/{id}', [TblDinamisController::class, 'destroy
 
 Route::resource('/admin/dashboard/skill', AdminSkillController::class);
 
-Route::resource('admin/dashboard/certificate', AdminCertificateController::class);
+Route::resource('/admin/dashboard/certificate', AdminCertificateController::class);
+
+Route::resource('/admin/dashboard/projects', AdminProjectController::class);
+
+Route::resource('admin/dashboard/contact', AdminContactController::class);
 
 require __DIR__.'/auth.php';

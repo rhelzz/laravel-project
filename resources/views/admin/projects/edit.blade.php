@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Edit Skill - Admin</title>
+        <title>Edit Project - Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{{ asset('template-admin/css/styles.css') }}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -26,52 +26,28 @@
             <div id="layoutSidenav_content">
                 <main class="ms-5">
                     <div class="container mt-5">
-                        <h1>Edit Sertifikat</h1>
-                    
-                        @if($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                    
-                        <form action="{{ route('certificate.update', $certificate->id) }}" method="POST" enctype="multipart/form-data">
+                        <h1>Edit Project</h1>
+                        <form action="{{ route('projects.update', $project) }}" method="POST">
                             @csrf
                             @method('PUT')
-                    
                             <div class="mb-3">
-                                <label for="name" class="form-label">Nama Sertifikat</label>
-                                <input type="text" name="name" class="form-control" id="name" value="{{ $certificate->name }}" required>
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $project->name) }}" required>
                             </div>
-                    
                             <div class="mb-3">
-                                <label for="issued_by" class="form-label">Issued By</label>
-                                <input type="text" name="issued_by" class="form-control" id="issued_by" value="{{ $certificate->issued_by }}" required>
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" required>{{ old('description', $project->description) }}</textarea>
                             </div>
-                    
                             <div class="mb-3">
-                                <label for="issued_at" class="form-label">Issued At</label>
-                                <input type="text" name="issued_at" class="form-control" id="issued_at" value="{{ $certificate->issued_at }}" required>
+                                <label for="link" class="form-label">Link</label>
+                                <input type="url" class="form-control" id="link" name="link" value="{{ old('link', $project->link) }}">
                             </div>
-                    
                             <div class="mb-3">
-                                <label for="description" class="form-label">Deskripsi</label>
-                                <textarea name="description" class="form-control" id="description" rows="3" required>{{ $certificate->description }}</textarea>
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $project->date) }}" required>
                             </div>
-                    
-                            <div class="mb-3">
-                                <label for="file" class="form-label">File (PDF)</label>
-                                @if($certificate->file)
-                                    <p>File saat ini: <a href="{{ asset('storage/'.$certificate->file) }}" target="_blank">Lihat File</a></p>
-                                @endif
-                                <input type="file" name="file" class="form-control" id="file" accept="application/pdf">
-                            </div>                            
-                    
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                            <a href="{{ route('certificate.index') }}" class="btn btn-secondary">Kembali</a>
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <a href="{{ route('projects.index') }}" class="btn btn-secondary">Back</a>
                         </form>
                     </div>
                 </main>

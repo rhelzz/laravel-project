@@ -36,7 +36,7 @@ class AdminCertificateController extends Controller
         Certificate::create($data);
 
         return redirect()->route('certificate.index')
-                         ->with('success', 'Produk berhasil ditambahkan.');
+                         ->with('success', 'Sertifikat berhasil ditambahkan.');
     }
 
     public function show(Certificate $certificate)
@@ -66,7 +66,7 @@ class AdminCertificateController extends Controller
         $certificate->update($data);
 
         return redirect()->route('certificate.index')
-                         ->with('success', 'Produk berhasil diupdate.');
+                         ->with('success', 'Sertifikat berhasil diupdate.');
     }
 
     public function destroy(Certificate $certificate)
@@ -74,6 +74,6 @@ class AdminCertificateController extends Controller
         $certificate->delete();
 
         return redirect()->route('certificate.index')
-                         ->with('success', 'Produk berhasil dihapus.');
+                         ->with('success', 'Sertifikat berhasil dihapus.');
     }
 }

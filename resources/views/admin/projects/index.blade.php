@@ -27,48 +27,41 @@
             </div>
             <div id="layoutSidenav_content">
                 <main class="ms-5">
-                    <div class="container mt-5">
-                        <h1>Daftar Sertifikat</h1>
-                        @if(session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                    
-                        <a href="{{ route('certificate.create') }}" class="btn btn-primary mb-3">Tambah Sertifikat</a>
-                    
-                        <table class="table table-striped">
-                            <thead>
+                    <h1 class="mt-5">Projects</h1>
+                    <a href="{{ route('projects.create') }}" class="btn btn-primary mb-3">Create Project</a>
+                    <table class="table table-bordered" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>#</th> <!-- Tambahkan kolom indeks -->
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Link</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($projects as $project)
                                 <tr>
-                                    <th>Nama Sertifikat</th>
-                                    <th>Issued By</th>
-                                    <th>Issued At</th>
-                                    <th>Deskripsi</th>
-                                    <th>File</th>
-                                    <th>Aksi</th>
+                                    <td>{{ $loop->iteration }}</td> <!-- Gunakan $loop->iteration untuk indeks -->
+                                    <td>{{ $project->name }}</td>
+                                    <td>{{ $project->description }}</td>
+                                    <td><a href="{{ $project->link }}" target="_blank">{{ $project->link }}</a></td>
+                                    <td>{{ $project->date }}</td>
+                                    <td>
+                                        <a href="{{ route('projects.show', $project) }}" class="btn btn-info btn-sm">View</a>
+                                        <a href="{{ route('projects.edit', $project) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{{ route('projects.destroy', $project) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="notifHapus(this)">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($certificates as $certificate)
-                                    <tr>
-                                        <td>{{ $certificate->name }}</td>
-                                        <td>{{ $certificate->issued_by }}</td>
-                                        <td>{{ $certificate->issued_at }}</td>
-                                        <td>{{ $certificate->description }}</td>
-                                        <td><a href="{{ asset('storage/' . $certificate->file) }}" class="btn btn-info btn-sm" target="_blank">Lihat</a></td>
-                                        <td>
-                                            <a href="{{ route('certificate.edit', $certificate->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('certificate.destroy', $certificate->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

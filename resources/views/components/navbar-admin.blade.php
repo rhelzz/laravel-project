@@ -9,6 +9,10 @@
             <div class="sb-nav-link-icon"><i class="fa-solid fa-bolt-lightning"></i></i></div>
             Skill
         </a>
+        <a class="nav-link" href="dashboard/certificate">
+            <div class="sb-nav-link-icon"><i class="fa-solid fa-bolt-lightning"></i></i></div>
+            Certificate
+        </a>
         <a class="nav-link" href="{{ route('admin.tables') }}">
             <div class="sb-nav-link-icon"><i class="fa-regular fa-user"></i></div>
             Tabel User

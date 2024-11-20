@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Detail Skill - Admin</title>
+        <title>Detail Project - Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{{ asset('template-admin/css/styles.css') }}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -26,15 +26,24 @@
             <div id="layoutSidenav_content">
                 <main class="ms-5">
                     <div class="container mt-5">
-                        <h1>Detail Sertifikat</h1>
-                    
-                        <p><strong>Nama Sertifikat:</strong> {{ $certificate->name }}</p>
-                        <p><strong>Issued By:</strong> {{ $certificate->issued_by }}</p>
-                        <p><strong>Issued At:</strong> {{ $certificate->issued_at }}</p>
-                        <p><strong>Deskripsi:</strong> {{ $certificate->description }}</p>
-                        <p><strong>File:</strong> <a href="{{ asset('storage/' . $certificate->file) }}" target="_blank">Lihat File</a></p>
-                    
-                        <a href="{{ route('certificate.index') }}" class="btn btn-secondary">Kembali</a>
+                        <h1>Project Details</h1>
+                        <div class="mb-3">
+                            <strong>Name:</strong>
+                            <p>{{ $project->name }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Description:</strong>
+                            <p>{{ $project->description }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Link:</strong>
+                            <p><a href="{{ $project->link }}" target="_blank">{{ $project->link }}</a></p>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Date:</strong>
+                            <p>{{ $project->date }}</p>
+                        </div>
+                        <a href="{{ route('projects.index') }}" class="btn btn-secondary">Back</a>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
